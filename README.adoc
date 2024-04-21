@@ -1,0 +1,21 @@
+= 3 Crypting Algorithms =
+
+== Description ==
+This project is an implementation of three different algorithms of encryption. The algorithms are encrypting the same text and prove their functionality by decrypting them as well.
+
+The three algorithms are:
+
+1. Substitution Encoder (simple)
+2. Substitution Encoder (advanced)
+3. Transposition Encoder
+
+The 1st and 3rd algorithm require a keyphrase input by user. The 2nd uses a prescribed word. The keyphrase used in 1st and 3rd algorithm is:
+
+ Без предисловий, сей же час Позвольте познакомить вас:
+
+The message to be encrypted is:
+
+ Местами эти дома казались затерянными среди широкой, как поле, улицы и нескончаемых деревянных заборов; местами сбивались в кучу, и здесь было заметно более движения народа и живости. Попадались почти смытые дождем вывески с кренделями и сапогами, кое-где с нарисованными синими брюками и подписью какого-то Аршавского портного
+
+Both texts are in russian and the demonstration process is made for russian texts.
+

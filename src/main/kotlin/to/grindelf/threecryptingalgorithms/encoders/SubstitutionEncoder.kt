@@ -1,4 +1,8 @@
-package to.grindelf.threecryptingalgorithms
+package to.grindelf.threecryptingalgorithms.encoders
+
+import to.grindelf.threecryptingalgorithms.utility.Toolbox.ENGLISH_ALPHABET
+import to.grindelf.threecryptingalgorithms.utility.Toolbox.RUSSIAN_ALPHABET
+import to.grindelf.threecryptingalgorithms.utility.Toolbox.UNSUPPORTED_SYMBOL
 
 
 class SubstitutionEncoder(
@@ -9,12 +13,6 @@ class SubstitutionEncoder(
     private val keyword: String = processKeyWord(keyword)
     private val alphabet: List<Char> = initializeAlphabet(language)
     private val encryptorTable: List<Pair<Char, Char>> = generateEncryptorTable()
-
-    companion object {
-        private val ENGLISH_ALPHABET = "abcdefghijklmnopqrstuvwxyz".toList()
-        private val RUSSIAN_ALPHABET = "абвгдеёжзийклмнопрстуфхцчшщъыьэюя".toList()
-        private val UNSUPPORTED_SYMBOL = Char(0)
-    }
 
     fun encrypt(codePhrase: String): String = processSecretMessage(processPhrase(codePhrase), encrypt = true)
 

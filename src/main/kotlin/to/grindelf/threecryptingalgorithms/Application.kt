@@ -1,5 +1,8 @@
 package to.grindelf.threecryptingalgorithms
 
+import to.grindelf.threecryptingalgorithms.encoders.Language
+import to.grindelf.threecryptingalgorithms.encoders.SubstitutionEncoder
+
 object Application {
 
     @JvmStatic

@@ -13,31 +13,29 @@ class AdvancedSubstitutionEncoder(
         private const val CHUNK_SIZE = 5
     }
 
-    fun encrypt(message: String): String = produceEncryptedMessage(
-        priorities, initializeMessageMatrix(message, columns = key.length)
-    )
+    fun encrypt(message: String): String {
+        val trimmedMessage = message.lowercase().replace(" ", "")
+        val encryptionMatrix = initializeMessageMatrix(trimmedMessage, columns = key.length)
+
+        return produceEncryptedMessage(priorities, encryptionMatrix)
+    }
 
 
     fun decrypt(message: String): String {
-        var messageProcessed = message
-        val rowsNumber = getNumberOfRows(message.length) // 4
-        val irregularColumns = getIrregularColumnsIndexes(message.length, rowsNumber) // [5, 4, 3]
-
-        // ehmsehoaepwtanrci
-        // ehms ehoa epwt anrc i
-        // ehms eho aepw tanrci
+        var messageProcessed = message.replace(" ", "")
+        val rowsNumber = getNumberOfRows(messageProcessed.length)
+        val irregularColumns = getIrregularColumnsIndexes(messageProcessed.length, rowsNumber)
 
         val matrix = mutableListOf<MutableList<Char>>()
 
         repeat(keyLength) { matrix.add(mutableListOf()) }
 
-        var fragment = ""
+        var fragment: String
 
         priorities.forEach { priorityIndex ->
             if (irregularColumns.contains(priorityIndex)) {
                 fragment = messageProcessed.substring(0, rowsNumber - 1).plus(" ")
                 messageProcessed = messageProcessed.drop(rowsNumber - 1)
-
             } else {
                 fragment = messageProcessed.substring(0, rowsNumber)
                 messageProcessed = messageProcessed.drop(rowsNumber)
@@ -46,8 +44,6 @@ class AdvancedSubstitutionEncoder(
                 matrix[priorityIndex].add(char)
             }
         }
-
-        println(matrix)
 
         // matrix is done
 
@@ -78,15 +74,6 @@ class AdvancedSubstitutionEncoder(
 
         return ceil(numberOfRows).toInt()
     }
-
-    private fun reorderColumns(matrix: List<List<Char>>, priorities: List<Int>): List<List<Char>> {
-        val reorderedMatrix = mutableListOf<List<Char>>()
-        for (priorityIndex in priorities) {
-            reorderedMatrix.add(matrix[priorityIndex])
-        }
-        return reorderedMatrix
-    }
-
 
     private fun produceEncryptedMessage(priorities: List<Int>, messageMatrix: List<List<Char>>): String {
         var message = ""
@@ -127,6 +114,6 @@ class AdvancedSubstitutionEncoder(
             codes[minIndex] = Int.MAX_VALUE
         }
 
-        return priorities.reversed()
+        return priorities
     }
 }

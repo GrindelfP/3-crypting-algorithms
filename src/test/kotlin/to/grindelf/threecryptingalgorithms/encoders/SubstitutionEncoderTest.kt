@@ -1,9 +1,7 @@
-package to.grindelf.threecryptingalgorithms
+package to.grindelf.threecryptingalgorithms.encoders
 
 import org.assertj.core.api.AssertionsForClassTypes.assertThat
 import org.junit.jupiter.api.Test
-import to.grindelf.threecryptingalgorithms.encoders.Language
-import to.grindelf.threecryptingalgorithms.encoders.SubstitutionEncoder
 
 class SubstitutionEncoderTest {
 

@@ -1,8 +1,12 @@
 package to.grindelf.threecryptingalgorithms.encoders
 
+import to.grindelf.threecryptingalgorithms.utility.Language
 import to.grindelf.threecryptingalgorithms.utility.Toolbox.ENGLISH_ALPHABET
 import to.grindelf.threecryptingalgorithms.utility.Toolbox.RUSSIAN_ALPHABET
 import to.grindelf.threecryptingalgorithms.utility.Toolbox.UNSUPPORTED_SYMBOL
+import to.grindelf.threecryptingalgorithms.utility.Toolbox.processKeyWord
+import to.grindelf.threecryptingalgorithms.utility.Toolbox.processPhrase
+import to.grindelf.threecryptingalgorithms.utility.UnsupportedSymbolException
 
 
 class SubstitutionEncoder(
@@ -65,17 +69,4 @@ class SubstitutionEncoder(
 
         return table
     }
-
-    private fun processPhrase(phrase: String): String = phrase.lowercase().filter { it.isLetter() }
-
-    private fun processKeyWord(phrase: String): String = processPhrase(phrase).toSet().joinToString("")
-}
-
-enum class Language {
-    ENGLISH,
-    RUSSIAN
-}
-
-class UnsupportedSymbolException : Throwable() {
-    override val message: String = "This letter is unsupported!"
 }

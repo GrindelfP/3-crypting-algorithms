@@ -2,9 +2,8 @@ package to.grindelf.threecryptingalgorithms.encoders
 
 import org.assertj.core.api.AssertionsForClassTypes.assertThat
 import org.junit.jupiter.api.Test
-import to.grindelf.threecryptingalgorithms.utility.Language
 
-class SubstitutionEncoderTest {
+class TranspositionEncoderTest {
 
     private val message = "Местами эти дома казались затерянными среди широкой, как поле, улицы и нескончаемых " +
             "деревянных заборов; местами сбивались в кучу, и здесь было заметно более движения народа и живости. " +
@@ -14,15 +13,11 @@ class SubstitutionEncoderTest {
     private val keyphrase = "Без предисловий, сей же час\n Позвольте познакомить вас:"
 
     @Test
-    fun `GIVEN text and keyphrase WHEN encrypted and decrypted THEN received simmilar results`() {
+    fun testOne() {
+        val transpositionEncoder = TranspositionEncoder(keyphrase)
+        val encoded = transpositionEncoder.encrypt(message)
+        val decoded = transpositionEncoder.decrypt(encoded)
 
-        val trimmedMessage = message.lowercase().filter { it.isLetter() }
-
-        val substitutionEncoder = SubstitutionEncoder(keyphrase, Language.RUSSIAN)
-
-        val encrypted = substitutionEncoder.encrypt(message)
-        val decrypted = substitutionEncoder.decrypt(encrypted)
-
-        assertThat(decrypted).isEqualTo(trimmedMessage)
+        assertThat(decoded).isEqualTo(message.lowercase().filter { it.isLetter() })
     }
 }

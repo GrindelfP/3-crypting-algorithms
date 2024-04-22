@@ -50,7 +50,7 @@ class TranspositionEncoder(
         val seconds = coordinates.map { it.second }
         val linearList = firsts + seconds
 
-        return linearList.windowed(2, 2) {it[0] to it[1]}
+        return linearList.windowed(2, 2) { it[0] to it[1] }
     }
 
     private fun reverseTransformCoordinates(coordinates: List<Pair<Int, Int>>): List<Pair<Int, Int>> {
@@ -58,7 +58,7 @@ class TranspositionEncoder(
         val firsGroup = coordinates.subList(0, coordinates.size / 2)
         val secondGroup = coordinates.subList(coordinates.size / 2, coordinates.size)
         var i = 0
-        while(i < firsGroup.size) {
+        while (i < firsGroup.size) {
             newCoordinates.add(Pair(firsGroup[i].first, secondGroup[i].first))
             newCoordinates.add(Pair(firsGroup[i].second, secondGroup[i].second))
             i++
@@ -73,7 +73,8 @@ class TranspositionEncoder(
         encoderMatrix.forEachIndexed { topIndex, column ->
             column.forEachIndexed { bottomIndex, element ->
                 if (element == char) {
-                    coordinates = Pair(bottomIndex, topIndex) }
+                    coordinates = Pair(bottomIndex, topIndex)
+                }
             }
         }
 

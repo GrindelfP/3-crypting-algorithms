@@ -48,6 +48,7 @@ class SubstitutionEncoder(
             true -> encryptorTable.forEach { pair ->
                 if (pair.first == char) newSymbol = pair.second
             }
+
             else -> encryptorTable.forEach { pair ->
                 if (pair.second == char) newSymbol = pair.first
             }

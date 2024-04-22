@@ -49,7 +49,7 @@ class AdvancedSubstitutionEncoder(
 
         var decryptedMessage = ""
         for (i in 0 until matrix[0].size) {
-            for (j in 0 until matrix.size){
+            for (j in 0 until matrix.size) {
                 decryptedMessage += matrix[j][i]
             }
         }

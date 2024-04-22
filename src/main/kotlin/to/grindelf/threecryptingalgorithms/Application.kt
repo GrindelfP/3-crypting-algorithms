@@ -35,8 +35,10 @@ object Application {
 
     private fun testSecondEncoder() {
         println("\n=============================\nADVANCED SUBSTITUTION ENCODER\n=============================")
-        println("This algorithm is tested on a prescribed and phrase, " +
-                "because phrase contains newline character and so cannot be inputted.")
+        println(
+            "This algorithm is tested on a prescribed and phrase, " +
+                    "because phrase contains newline character and so cannot be inputted."
+        )
 
         val message = "Без предисловий, сей же час \nПозвольте познакомить вас:"
 

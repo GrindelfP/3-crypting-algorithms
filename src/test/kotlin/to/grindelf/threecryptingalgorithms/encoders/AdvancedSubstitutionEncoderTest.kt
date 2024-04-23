@@ -5,9 +5,9 @@ import org.junit.jupiter.api.Test
 
 class AdvancedSubstitutionEncoderTest {
 
-    private val advancedSubstitutionEncoder = AdvancedSubstitutionEncoder()
+    private val advancedSubstitutionEncoder = AdvancedSubstitutionEncoder("брусилова")
 
-    private val message = "Без предисловий, сей же час \nПозвольте познакомить вас:"
+    private val message = "апельсин яблоко лимон мандарин"
 
     @Test
     fun test() {

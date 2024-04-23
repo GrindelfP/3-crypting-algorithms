@@ -5,6 +5,7 @@ import to.grindelf.threecryptingalgorithms.utility.Toolbox.processKeyWord
 import to.grindelf.threecryptingalgorithms.utility.Toolbox.processPhrase
 import to.grindelf.threecryptingalgorithms.utility.UnsupportedSymbolException
 
+
 class TranspositionEncoder(
     keyword: String,
 ) {
@@ -21,18 +22,20 @@ class TranspositionEncoder(
         trimmedMessage.forEach { char ->
             coordinates.add(getCoordinatesOf(char))
         }
+        val transformed = transformCoordinates(coordinates)
 
-        return buildByCoordinates(transformCoordinates(coordinates))
+        return buildByCoordinates(transformed)
     }
 
     fun decrypt(message: String): String {
+        val trimmedMessage = processPhrase(message)
         val coordinates = mutableListOf<Pair<Int, Int>>()
 
-        message.forEach { char ->
+        trimmedMessage.forEach { char ->
             coordinates.add(getCoordinatesOf(char))
         }
 
-        return buildByCoordinates(reverseTransformCoordinates(coordinates))
+        return buildByCoordinates(revertCoordinates(coordinates))
     }
 
     private fun buildByCoordinates(transformCoordinates: List<Pair<Int, Int>>): String {
@@ -53,6 +56,7 @@ class TranspositionEncoder(
         return linearList.windowed(2, 2) { it[0] to it[1] }
     }
 
+    @Deprecated("This function is deprecated and will be removed soon")
     private fun reverseTransformCoordinates(coordinates: List<Pair<Int, Int>>): List<Pair<Int, Int>> {
         val newCoordinates = mutableListOf<Pair<Int, Int>>()
         val firsGroup = coordinates.subList(0, coordinates.size / 2)
@@ -108,5 +112,27 @@ class TranspositionEncoder(
         }
 
         return matrix
+    }
+
+    private fun newCoordinatesLined(coordinates: List<Pair<Int, Int>>): List<Int> {
+        val coordinatesLined = mutableListOf<Int>()
+
+        coordinates.forEach { coordinate ->
+            coordinatesLined.add(coordinate.first)
+            coordinatesLined.add(coordinate.second)
+        }
+
+        return coordinatesLined
+    }
+
+    private fun revertCoordinates(coordinates: List<Pair<Int, Int>>): List<Pair<Int, Int>> {
+        val revertedCoordinates = mutableListOf<Pair<Int, Int>>()
+        val processedCoordinates = newCoordinatesLined(coordinates)
+        val first = processedCoordinates.subList(0, processedCoordinates.size / 2)
+        val second = processedCoordinates.subList(processedCoordinates.size / 2, processedCoordinates.size)
+
+        first.indices.mapTo(revertedCoordinates) { Pair(first[it], second[it]) }
+
+        return revertedCoordinates
     }
 }

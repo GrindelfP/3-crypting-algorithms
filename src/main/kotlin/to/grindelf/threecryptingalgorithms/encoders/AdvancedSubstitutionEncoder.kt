@@ -17,7 +17,7 @@ class AdvancedSubstitutionEncoder(
         val trimmedMessage = message.lowercase().replace(" ", "")
         val encryptionMatrix = initializeMessageMatrix(trimmedMessage, columns = key.length)
 
-        return produceEncryptedMessage(priorities, encryptionMatrix)
+        return produceEncryptedMessage(encryptionMatrix)
     }
 
 
@@ -75,7 +75,7 @@ class AdvancedSubstitutionEncoder(
         return ceil(numberOfRows).toInt()
     }
 
-    private fun produceEncryptedMessage(priorities: List<Int>, messageMatrix: List<List<Char>>): String {
+    private fun produceEncryptedMessage(messageMatrix: List<List<Char>>): String {
         var message = ""
         priorities.forEach { priorityIndex ->
             val currentColumn = messageMatrix[priorityIndex]

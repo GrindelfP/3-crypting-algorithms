@@ -26,7 +26,6 @@ object Application {
     private fun testFirstEncoder(keyphrase: String, message: String) {
         println("====================\nSUBSTITUTION ENCODER\n====================")
 
-
         val substitutionEncoder = SubstitutionEncoder(keyphrase, Language.RUSSIAN)
         val encryptedMessage = substitutionEncoder.encrypt(message)
         println("Encrypted message: $encryptedMessage")
